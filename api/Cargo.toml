@@ -13,7 +13,7 @@ serde = { version = "1.0", features = ["derive"] }
 dotenv = "0.13.0"
 r2d2 = "0.8.3"
 r2d2-mongodb = "*"
-
+rocket_cors = "0.5.0"
 
 [dependencies.rocket_contrib]
 version = "0.4.6"

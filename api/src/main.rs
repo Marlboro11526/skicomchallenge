@@ -31,6 +31,7 @@ fn make_cors() -> Cors {
         allowed_headers: AllowedHeaders::some(&[
             "Authorization",
             "Accept",
+            "Content-Type",
             "Access-Control-Allow-Origin",
         ]),
         allow_credentials: true,
