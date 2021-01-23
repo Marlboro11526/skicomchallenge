@@ -6,7 +6,7 @@ import {
   Link
 } from "react-router-dom";
 
-import Form from './Form'
+import Form from './Users/Form'
 
 export default function App() {
   return (
@@ -18,7 +18,7 @@ export default function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/registration">Add User</Link>
+              <Link to="/users/registration">Add User</Link>
             </li>
             <li>
               <Link to="/users">Users</Link>
@@ -29,7 +29,7 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/registration">
+          <Route path="/users/registration">
             <Form />
           </Route>
           <Route path="/users">
