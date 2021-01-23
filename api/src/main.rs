@@ -10,7 +10,6 @@ extern crate rocket_contrib;
 extern crate serde;
 
 use dotenv::dotenv;
-use rocket::{Request, Rocket};
 mod db;
 pub mod resorts;
 
@@ -29,6 +28,7 @@ fn main() {
             routes![
                 resorts::controller::index,
                 resorts::controller::list_resorts,
+                resorts::controller::get_resort,
                 resorts::controller::add_resort,
                 resorts::controller::update_resort,
                 resorts::controller::delete_resort
