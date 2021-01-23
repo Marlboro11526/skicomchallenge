@@ -17,7 +17,7 @@ pub struct InsertableResort {
 }
 
 impl InsertableResort {
-    fn from_resort(resorts: Resort) -> InsertableResort {
-        InsertableResort { name: resorts.name }
+    fn from_resort(resort: Resort) -> InsertableResort {
+        InsertableResort { name: resort.name }
     }
 }

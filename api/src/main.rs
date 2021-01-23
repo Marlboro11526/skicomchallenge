@@ -11,7 +11,9 @@ extern crate serde;
 
 use dotenv::dotenv;
 mod db;
+
 pub mod resorts;
+pub mod users;
 
 #[catch(500)]
 fn internal_error() -> &'static str {
@@ -31,7 +33,9 @@ fn main() {
                 resorts::controller::get_resort,
                 resorts::controller::add_resort,
                 resorts::controller::update_resort,
-                resorts::controller::delete_resort
+                resorts::controller::delete_resort,
+                users::controller::list_users,
+                users::controller::add_user,
             ],
         )
         .launch();
