@@ -1,65 +1,37 @@
-#![feature(proc_macro_hygiene, decl_macro)]
-
+#![feature(decl_macro, proc_macro_hygiene)]
 #[macro_use]
 extern crate rocket;
+extern crate dotenv;
+extern crate mongodb;
+extern crate r2d2;
+extern crate r2d2_mongodb;
+extern crate rocket_contrib;
+#[macro_use]
+extern crate serde;
 
-use rocket_contrib::json::Json;
-use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
+use dotenv::dotenv;
+use rocket::{Request, Rocket};
+mod db;
+pub mod resorts;
 
-#[derive(Serialize, Deserialize)]
-struct Resort {
-    id: u32,
-    name: String,
-}
-
-#[get("/")]
-fn index() -> &'static str {
-    "Service up!"
-}
-
-#[get("/resorts")]
-fn list_resorts() -> Json<Vec<Resort>> {
-    let mut resorts = Vec::new();
-
-    resorts.push(Resort {
-        id: 1,
-        name: "Ensenada Hotel".to_string(),
-    });
-
-    resorts.push(Resort {
-        id: 2,
-        name: "Rosarito Hotel".to_string(),
-    });
-
-    return Json(resorts);
-}
-
-#[post("/resorts", data = "<resort>")]
-fn add_resort(resort: Json<Resort>) -> &'static str {
-    "Hello, world!"
-}
-
-#[put("/resorts", data = "<resort>")]
-fn update_resort(resort: Json<Resort>) -> &'static str {
-    "Hello, world!"
-}
-
-#[delete("/resorts/<id>")]
-fn delete_resort(id: u32) -> &'static str {
-    "Hello, world!"
+#[catch(500)]
+fn internal_error() -> &'static str {
+    "We've encountered an unexpected error."
 }
 
 fn main() {
+    dotenv().ok();
     rocket::ignite()
+        .register(catchers![internal_error])
+        .manage(db::init_pool())
         .mount(
             "/",
             routes![
-                index,
-                list_resorts,
-                add_resort,
-                update_resort,
-                delete_resort
+                resorts::controller::index,
+                resorts::controller::list_resorts,
+                resorts::controller::add_resort,
+                resorts::controller::update_resort,
+                resorts::controller::delete_resort
             ],
         )
         .launch();
