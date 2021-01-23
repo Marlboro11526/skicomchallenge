@@ -4,9 +4,10 @@
 extern crate rocket;
 
 use rocket_contrib::json::Json;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 
-#[derive(Deserialize)]
+#[derive(Serialize, Deserialize)]
 struct Resort {
     id: u32,
     name: String,
@@ -14,12 +15,24 @@ struct Resort {
 
 #[get("/")]
 fn index() -> &'static str {
-    "Hello, world!"
+    "Service up!"
 }
 
 #[get("/resorts")]
-fn list_resorts() -> &'static str {
-    "Hello, world!"
+fn list_resorts() -> Json<Vec<Resort>> {
+    let mut resorts = Vec::new();
+
+    resorts.push(Resort {
+        id: 1,
+        name: "Ensenada Hotel".to_string(),
+    });
+
+    resorts.push(Resort {
+        id: 2,
+        name: "Rosarito Hotel".to_string(),
+    });
+
+    return Json(resorts);
 }
 
 #[post("/resorts", data = "<resort>")]
@@ -38,5 +51,16 @@ fn delete_resort(id: u32) -> &'static str {
 }
 
 fn main() {
-    rocket::ignite().mount("/", routes![index]).launch();
+    rocket::ignite()
+        .mount(
+            "/",
+            routes![
+                index,
+                list_resorts,
+                add_resort,
+                update_resort,
+                delete_resort
+            ],
+        )
+        .launch();
 }
