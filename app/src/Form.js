@@ -14,9 +14,11 @@ function Form() {
             favorite_resort: e.target[3].value,
         }
 
-        //TODO: Fix CORS errors when sending Content-Type as application/json
         const response = await fetch("http://localhost:8000/users", {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(newUser)
         })
 
