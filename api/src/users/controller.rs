@@ -17,6 +17,7 @@ pub fn index() -> &'static str {
     "Service up!"
 }
 
+//TODO: Fix CORS errors when sending Content-Type as application/json
 #[get("/users")]
 pub fn list_users(connection: Conn) -> Result<Json<Vec<User>>, Status> {
     match users::repository::all(&connection) {
@@ -25,7 +26,7 @@ pub fn list_users(connection: Conn) -> Result<Json<Vec<User>>, Status> {
     }
 }
 
-#[post("/users", format = "application/json", data = "<user>")]
+#[post("/users", data = "<user>")]
 pub fn add_user(user: Json<User>, connection: Conn) -> Result<Json<ObjectId>, Status> {
     match users::repository::insert(user.into_inner(), &connection) {
         Ok(res) => Ok(Json(res)),

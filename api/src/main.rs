@@ -15,29 +15,29 @@ mod db;
 pub mod resorts;
 pub mod users;
 
-use rocket::fairing::{Fairing, Info, Kind};
-use rocket::http::Header;
-use rocket::{Request, Response};
+use rocket::http::Method;
+use rocket_cors::{AllowedHeaders, AllowedOrigins, Cors, CorsOptions};
 
-struct CORS();
+fn make_cors() -> Cors {
+    let allowed_origins = AllowedOrigins::All;
 
-impl Fairing for CORS {
-    fn info(&self) -> Info {
-        Info {
-            name: "Add CORS headers to requests",
-            kind: Kind::Response,
-        }
+    CorsOptions {
+        // 5.
+        allowed_origins,
+        allowed_methods: vec![Method::Get, Method::Post, Method::Put, Method::Delete]
+            .into_iter()
+            .map(From::from)
+            .collect(),
+        allowed_headers: AllowedHeaders::some(&[
+            "Authorization",
+            "Accept",
+            "Access-Control-Allow-Origin",
+        ]),
+        allow_credentials: true,
+        ..Default::default()
     }
-
-    fn on_response(&self, _request: &Request, response: &mut Response) {
-        response.set_header(Header::new("Access-Control-Allow-Origin", "*"));
-        response.set_header(Header::new(
-            "Access-Control-Allow-Methods",
-            "POST, GET, PATCH, OPTIONS",
-        ));
-        response.set_header(Header::new("Access-Control-Allow-Headers", "*"));
-        response.set_header(Header::new("Access-Control-Allow-Credentials", "true"));
-    }
+    .to_cors()
+    .expect("error while building CORS")
 }
 
 #[catch(500)]
@@ -48,7 +48,6 @@ fn internal_error() -> &'static str {
 fn main() {
     dotenv().ok();
     rocket::ignite()
-        .attach(CORS())
         .register(catchers![internal_error])
         .manage(db::init_pool())
         .mount(
@@ -64,5 +63,6 @@ fn main() {
                 users::controller::add_user,
             ],
         )
+        .attach(make_cors())
         .launch();
 }
