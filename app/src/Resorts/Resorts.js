@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function Users() {
   const basePath = process.env.REACT_APP_API_BASE_URL;
-  const resortsController = process.env.REACT_APP_API_RESORTS_PATH;
+  const resortsController = "/resorts";
 
   const [resorts, setResorts] = useState(null);
   const [editable, setEditable] = useState("");

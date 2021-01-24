@@ -3,8 +3,8 @@ import { Redirect } from "react-router";
 
 function Form() {
   const basePath = process.env.REACT_APP_API_BASE_URL;
-  const usersController = process.env.REACT_APP_API_USERS_PATH;
-  const resortsController = process.env.REACT_APP_API_USERS_PATH;
+  const usersController = "/users";
+  const resortsController = "/resorts";
 
   const [resorts, setResorts] = useState([]);
   const [redirect, setRedirect] = useState("");

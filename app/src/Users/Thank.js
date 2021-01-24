@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export default function Thank() {
   const basePath = process.env.REACT_APP_API_BASE_URL;
-  const usersController = process.env.REACT_APP_API_USERS_PATH;
+  const usersController = "/users";
 
   const [user, setUser] = useState("");
 
