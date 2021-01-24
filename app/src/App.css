@@ -34,3 +34,22 @@
   justify-content: space-evenly;
   width: 100%;
 }
+
+.home-screen {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.home-screen > div {
+  margin: auto;
+}
+
+.home-screen > div > p {
+  text-align: center;
+  margin: 1em 0;
+}
+
+.home-screen > div > p:first-child {
+  font-weight: bold;
+}

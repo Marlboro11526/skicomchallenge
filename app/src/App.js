@@ -55,5 +55,22 @@ export default function App() {
 }
 
 function Home() {
-  return <></>;
+  return (
+    <>
+      <div class="home-screen">
+        <div>
+          <p>Welcome to SkiCom!</p>
+          <p>
+            This application was made with React using create-react-app, as well
+            as Rust+Rocket on the back-end.
+          </p>
+          <p>
+            Styling is a mix of vanilla CSS with a little bit of TailwindCSS
+            mixed in.
+          </p>
+          <p>It's using a MongoDB database for persistence.</p>
+        </div>
+      </div>
+    </>
+  );
 }
