@@ -8,18 +8,18 @@ use mongodb::bson;
 pub struct User {
     #[serde(rename = "_id")]
     pub id: Option<bson::oid::ObjectId>,
-    first_name: Option<String>,
-    last_name: Option<String>,
-    email: Option<String>,
-    favorite_resort: Option<String>,
+    first_name: String,
+    last_name: String,
+    email: String,
+    favorite_resort: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct InsertableUser {
-    pub first_name: Option<String>,
-    pub last_name: Option<String>,
-    pub email: Option<String>,
-    pub favorite_resort: Option<String>,
+    pub first_name: String,
+    pub last_name: String,
+    pub email: String,
+    pub favorite_resort: String,
 }
 
 impl InsertableUser {

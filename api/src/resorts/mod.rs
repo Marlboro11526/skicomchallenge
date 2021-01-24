@@ -8,12 +8,12 @@ use mongodb::bson;
 pub struct Resort {
     #[serde(rename = "_id")]
     pub id: Option<bson::oid::ObjectId>,
-    name: Option<String>,
+    name: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct InsertableResort {
-    pub name: Option<String>,
+    pub name: String,
 }
 
 impl InsertableResort {
