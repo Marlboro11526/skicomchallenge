@@ -1,4 +1,3 @@
-import './Form.css';
 import { useEffect, useState } from 'react';
 
 function Users() {

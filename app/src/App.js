@@ -6,18 +6,22 @@ import {
   Link
 } from "react-router-dom";
 
-import Users from './Users/Users'
-import Form from './Users/Form'
-import Thank from './Users/Thank'
+import Users from './Users/Users';
+import Form from './Users/Form';
+import Thank from './Users/Thank';
 
-import Resorts from './Resorts/Resorts'
+import Resorts from './Resorts/Resorts';
+
+
+import './App.css';
+import './Users/Form.css';
 
 
 export default function App() {
   return (
     <Router>
       <div>
-        <nav>
+        <nav className="menu">
           <ul> 
             <li>
               <Link to="/">Home</Link>
