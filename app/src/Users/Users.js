@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 function Users() {
     const [users, setUsers] = useState(null);
     const [sortedBy, setSortedBy] = useState("");
+    const [frequencies, setFrequencies] = useState({});
 
     const fetchData = async () => {
         await fetch("http://localhost:8000/users")
@@ -38,7 +39,17 @@ function Users() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    let reduction = users && users.reduce((sums, user) => {
+      sums[user.favorite_resort] = (sums[user.favorite_resort] || 0) + 1;
+      return sums;
+  }, []);
+
+  setFrequencies(reduction);
+}, [users])
+
   return (
+<>
 <table className="table-auto">
   <thead>
     <tr>
@@ -59,6 +70,26 @@ function Users() {
     
   </tbody>
 </table>
+
+<table className="table-auto">
+  <thead>
+    <tr>
+      <th>Resort</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {frequencies && Object.entries(frequencies).map(([key, value]) => (
+    <tr key={key}>
+      <td>{key}</td>
+      <td>{value}</td>
+    </tr>
+  ))}
+    
+  </tbody>
+</table>
+</>
   );
 }
 
