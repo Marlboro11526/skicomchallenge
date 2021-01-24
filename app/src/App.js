@@ -8,6 +8,7 @@ import {
 
 import Users from './Users/Users'
 import Form from './Users/Form'
+import Thank from './Users/Thank'
 
 import Resorts from './Resorts/Resorts'
 
@@ -17,7 +18,7 @@ export default function App() {
     <Router>
       <div>
         <nav>
-          <ul>
+          <ul> 
             <li>
               <Link to="/">Home</Link>
             </li>
@@ -41,6 +42,9 @@ export default function App() {
           </Route>
           <Route path="/users">
             <Users />
+          </Route>
+          <Route path="/thankyou/">
+            <Thank />
           </Route>
           <Route path="/resorts">
             <Resorts />

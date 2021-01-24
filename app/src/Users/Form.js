@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
+import {Redirect} from 'react-router';
 
 function Form() {
     const [resorts, setResorts] = useState([]);
+    const [redirect, setRedirect] = useState("");
+
 
     async function handleSubmit(e){
         e.preventDefault();
@@ -18,10 +21,10 @@ function Form() {
             headers: {
                 'Content-Type': 'application/json'
             },
+            redirect: 'follow',
             body: JSON.stringify(newUser)
-        })
+        }).then(res => res.json()).then(data => setRedirect(`/thankyou/${data.$oid}`)).catch(e => console.log)
 
-        console.log(response.json());
 
     }
 
@@ -38,6 +41,9 @@ function Form() {
     }, []);
 
   return (
+<>
+{redirect && <Redirect to={redirect}/>}
+
 <div className="mt-10 sm:mt-0">
   <div className="md:grid md:grid-cols-3 md:gap-6">
     <div className="md:col-span-1">
@@ -88,6 +94,7 @@ function Form() {
     </div>
   </div>
 </div>
+</>
   );
 }
 
