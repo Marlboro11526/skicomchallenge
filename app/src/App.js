@@ -9,6 +9,9 @@ import {
 import Users from './Users/Users'
 import Form from './Users/Form'
 
+import Resorts from './Resorts/Resorts'
+
+
 export default function App() {
   return (
     <Router>
@@ -24,6 +27,9 @@ export default function App() {
             <li>
               <Link to="/users">Users</Link>
             </li>
+            <li>
+              <Link to="/resorts">Resorts</Link>
+            </li>
           </ul>
         </nav>
 
@@ -35,6 +41,9 @@ export default function App() {
           </Route>
           <Route path="/users">
             <Users />
+          </Route>
+          <Route path="/resorts">
+            <Resorts />
           </Route>
           <Route path="/">
             <Home />
