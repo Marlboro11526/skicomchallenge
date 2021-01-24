@@ -58,9 +58,9 @@ function Form() {
     <>
       {redirect && <Redirect to={redirect} />}
 
-      <div className="mt-10 sm:mt-0">
-        <div className="md:grid md:grid-cols-3 md:gap-6">
-          <div className="md:col-span-1">
+      <div className="mt-10 sm:mt-0 wrapper">
+        <div className="md:grid md:grid-cols-3 md:gap-6 container">
+          <div className="md:col-span-1 form-information">
             <div className="px-4 sm:px-0">
               <h3 className="text-lg font-medium leading-6 text-gray-900">
                 Customer Registration

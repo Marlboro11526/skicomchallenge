@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.wrapper {
+  height: 100vh;
+}
+
+.container {
+  height: 100%;
+}
+
+.form-information {
+  margin: auto;
+}
+
+.form-information + div {
+  margin: auto 0;
+}
