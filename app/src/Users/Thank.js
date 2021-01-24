@@ -1,22 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export default function Thank() {
+  const basePath = process.env.REACT_APP_API_BASE_URL;
+  const usersController = process.env.REACT_APP_API_USERS_PATH;
 
-    const [user, setUser] = useState("");
+  const [user, setUser] = useState("");
 
-    
-useEffect(() => {
+  useEffect(() => {
+    let userId = window.location.pathname.replace("/thankyou/", "");
 
-    fetch(`http://localhost:8000/users/${window.location.pathname.replace("/thankyou/", "")}`)
-    .then(res => res.json())
-    .then(data => {
+    fetch(`${basePath + usersController}/${userId}`)
+      .then((res) => res.json())
+      .then((data) => {
         console.log(data);
         setUser(data.first_name);
-    });
-}, [])
+      })
+      .catch(console.log);
+  }, []);
 
-
-    return <div>
-    Thank you, {user}!
+  return (
+    <div class="thank-you-screen">
+      <p>Thank you, {user}!</p>
     </div>
+  );
 }

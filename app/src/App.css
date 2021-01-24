@@ -23,10 +23,10 @@
 
 .menu {
   display: flex;
-    justify-content: center;
-    width: 100%;
+  justify-content: center;
+  width: 100%;
 
-    margin: 1em;
+  margin: 1em;
 }
 
 .menu > ul {
@@ -34,4 +34,3 @@
   justify-content: space-evenly;
   width: 100%;
 }
-
