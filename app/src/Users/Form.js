@@ -36,18 +36,7 @@ function Form() {
     const fetchData = async () => {
       fetch(`${basePath + resortsController}`)
         .then((res) => res.json())
-        .then((json) =>
-          setResorts(
-            <>
-              {/* TODO: unpack jsx in the returned object to make it cleaner */}
-              {json.map((item) => (
-                <option key={item._id.$oid} value={item._id.$oid}>
-                  {item.name}
-                </option>
-              ))}
-            </>
-          )
-        )
+        .then((data) => setResorts(data))
         .catch(console.log);
     };
 
@@ -119,7 +108,7 @@ function Form() {
                       </label>
                       <input
                         required
-                        type="text"
+                        type="email"
                         name="email_address"
                         id="email_address"
                         autoComplete="email"
@@ -141,7 +130,12 @@ function Form() {
                         autoComplete="resort"
                         className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       >
-                        {resorts}
+                        {resorts &&
+                          resorts.map((item) => (
+                            <option key={item._id.$oid} value={item._id.$oid}>
+                              {item.name}
+                            </option>
+                          ))}
                       </select>
                     </div>
                   </div>
