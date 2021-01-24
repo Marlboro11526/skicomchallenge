@@ -8,7 +8,6 @@ import Thank from "./Users/Thank";
 import Resorts from "./Resorts/Resorts";
 
 import "./App.css";
-import "./Users/Form.css";
 
 export default function App() {
   return (

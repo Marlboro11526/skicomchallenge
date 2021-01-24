@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router";
 
+import "./Form.css";
+
 function Form() {
   const basePath = process.env.REACT_APP_API_BASE_URL;
   const usersController = "/users";

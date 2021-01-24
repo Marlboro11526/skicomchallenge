@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import "./Thank.css";
+
 export default function Thank() {
   const basePath = process.env.REACT_APP_API_BASE_URL;
   const usersController = "/users";
@@ -20,7 +22,9 @@ export default function Thank() {
 
   return (
     <div class="thank-you-screen">
-      <p>Thank you, {user}!</p>
+      <p>
+        Thank you, <span>{user}</span>!
+      </p>
     </div>
   );
 }
