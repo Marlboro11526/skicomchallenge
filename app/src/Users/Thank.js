@@ -6,11 +6,17 @@ export default function Thank() {
 
     
 useEffect(() => {
-    setUser(window.location.pathname.replace("/thankyou/", ""));
+
+    fetch(`http://localhost:8000/users/${window.location.pathname.replace("/thankyou/", "")}`)
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        setUser(data.first_name);
+    });
 }, [])
 
 
     return <div>
-    thanks {user}!
+    Thank you, {user}!
     </div>
 }
