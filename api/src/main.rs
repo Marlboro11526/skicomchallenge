@@ -62,6 +62,7 @@ fn main() {
                 resorts::controller::update_resort,
                 resorts::controller::delete_resort,
                 users::controller::list_users,
+                users::controller::get_user,
                 users::controller::add_user,
             ],
         )
