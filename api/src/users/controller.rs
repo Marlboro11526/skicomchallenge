@@ -25,6 +25,19 @@ pub fn list_users(connection: Conn) -> Result<Json<Vec<User>>, Status> {
     }
 }
 
+#[get("/users/<id>")]
+pub fn get_user(id: String, connection: Conn) -> Result<Json<User>, Status> {
+    match ObjectId::with_string(&String::from(&id)) {
+        Ok(res) => match users::repository::get(res, &connection) {
+            Ok(res) => Ok(Json(res.unwrap())),
+            Err(err) => Err(error_status(err)),
+        },
+        Err(_) => Err(error_status(Error::DefaultError(String::from(
+            "Couldn't parse ObjectId",
+        )))),
+    }
+}
+
 #[post("/users", format = "application/json", data = "<user>")]
 pub fn add_user(user: Json<User>, connection: Conn) -> Result<Json<ObjectId>, Status> {
     match users::repository::insert(user.into_inner(), &connection) {

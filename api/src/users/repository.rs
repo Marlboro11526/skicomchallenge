@@ -2,7 +2,7 @@
 use crate::db::Conn;
 use crate::r2d2_mongodb::mongodb::db::ThreadedDatabase;
 use crate::users::{InsertableUser, User};
-use mongodb::{bson, error::Error, oid::ObjectId};
+use mongodb::{bson, doc, error::Error, oid::ObjectId};
 
 const COLLECTION: &str = "users";
 
@@ -18,6 +18,24 @@ pub fn all(connection: &Conn) -> Result<Vec<User>, Error> {
             Err(err) => Err(err),
         })
         .collect::<Result<Vec<User>, Error>>()
+}
+
+pub fn get(id: ObjectId, connection: &Conn) -> Result<Option<User>, Error> {
+    match connection
+        .collection(COLLECTION)
+        .find_one(Some(doc! {"_id": id}), None)
+    {
+        Ok(db_result) => match db_result {
+            Some(result_doc) => match bson::from_bson(bson::Bson::Document(result_doc)) {
+                Ok(result_model) => Ok(Some(result_model)),
+                Err(_) => Err(Error::DefaultError(String::from(
+                    "Failed to create reverse BSON",
+                ))),
+            },
+            None => Ok(None),
+        },
+        Err(err) => Err(err),
+    }
 }
 
 pub fn insert(user: User, connection: &Conn) -> Result<ObjectId, Error> {
