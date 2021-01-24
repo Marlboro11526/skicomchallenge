@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 
+import Users from './Users/Users'
 import Form from './Users/Form'
 
 export default function App() {
@@ -45,13 +46,5 @@ export default function App() {
 }
 
 function Home() {
-  return <h2>Home</h2>;
-}
-
-function AddUser() {
-  return <h2>Add User</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
+  return <></>
 }
