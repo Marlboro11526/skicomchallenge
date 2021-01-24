@@ -9,15 +9,32 @@ function Users() {
     const fetchData = async () => {
         await fetch("http://localhost:8000/resorts")
         .then(res => res.json())
-        .then(data => setResorts(data))
+        .then(data => {
+            setResorts(data);
+            setEditable("");
+            setEditedText("");
+            document.getElementById('new-resort-field').value = "";
+        })
         .catch(console.log);
-
-        setEditable("");
-        setEditedText(""); 
   }
 
-  const addResort = async (resort) => {
-    await fetch("http://localhost:8000/resorts");
+  const addResort = async () => {
+    if(!editedText){
+        setEditable("");
+        return;
+    }
+
+    await fetch(`http://localhost:8000/resorts/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name: editedText })
+    }).then(
+    () => {
+        fetchData();
+    }
+    );
 }
 
 const updateResort = async (id) => {
@@ -52,13 +69,6 @@ const updateResort = async (id) => {
     fetchData();
   }
 
-  const enableEdit = e => {
-      e.target.contentEditable = true;
-      e.target.defaultValue = "";
-      e.target.value = "";
-
-  }
-
   const onInputChange = e => {
       setEditedText(e.target.value);
   }
@@ -67,16 +77,13 @@ const updateResort = async (id) => {
     fetchData();
   }, []);
 
-
-
   return (
 <>
 <table className="table-auto">
     <thead>
         <tr>
             <th>Resort Name</th>
-            <th>Edit</th>
-            <th>Delete</th>
+
         </tr>
     </thead>
   <tbody>
@@ -94,7 +101,10 @@ const updateResort = async (id) => {
         }
     <td onClick={() => deleteResort(item._id.$oid)}>🗑</td>
   </tr>)}
-    
+    <tr>
+        <td><input id="new-resort-field" placeholder="New resort..." onChange={onInputChange} type="text"/></td> 
+        <td onClick={() => addResort()}>{editedText ? "🖫" : ""}</td>
+    </tr>
   </tbody>
 </table>
 
