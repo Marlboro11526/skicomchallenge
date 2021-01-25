@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 function Users() {
   const basePath = process.env.REACT_APP_API_BASE_URL;
   const usersController = "/users";
+  const resortsController = "/resorts";
 
   const [users, setUsers] = useState(null);
+  const [resorts, setResorts] = useState(null);
   const [sortedBy, setSortedBy] = useState("");
   const [frequencies, setFrequencies] = useState({});
 
@@ -12,6 +14,11 @@ function Users() {
     await fetch(`${basePath + usersController}`)
       .then((res) => res.json())
       .then((data) => setUsers(data))
+      .catch(console.log);
+
+    await fetch(`${basePath + resortsController}`)
+      .then((res) => res.json())
+      .then((data) => setResorts(data))
       .catch(console.log);
   };
 
@@ -98,7 +105,11 @@ function Users() {
                   <td>{item.first_name}</td>
                   <td>{item.last_name}</td>
                   <td>{item.email}</td>
-                  <td>{item.favorite_resort}</td>
+                  <td>
+                    {resorts &&
+                      resorts.find((r) => r._id.$oid === item.favorite_resort)
+                        .name}
+                  </td>
                 </tr>
               ))}
           </tbody>
@@ -117,7 +128,9 @@ function Users() {
             {frequencies &&
               Object.entries(frequencies).map(([key, value]) => (
                 <tr key={key}>
-                  <td>{key}</td>
+                  <td>
+                    {resorts && resorts.find((r) => r._id.$oid === key).name}
+                  </td>
                   <td>{value}</td>
                 </tr>
               ))}
