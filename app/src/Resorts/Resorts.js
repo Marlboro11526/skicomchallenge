@@ -80,7 +80,7 @@ function Users() {
 
   return (
     <>
-      <div class="description">
+      <div className="description">
         <p>Here you can add and manipulate resort registrations.</p>
         <p>
           Click 🖉 to begin editing an existing resort, then click 🖫 to save the
@@ -92,7 +92,7 @@ function Users() {
           resort.
         </p>
       </div>
-      <div class="table-wrapper">
+      <div className="table-wrapper">
         <table className="table-auto">
           <thead>
             <tr>

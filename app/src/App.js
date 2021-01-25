@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Users from "./Users/Users";
@@ -10,22 +10,68 @@ import Resorts from "./Resorts/Resorts";
 import "./App.css";
 
 export default function App() {
+  const [current, setCurrent] = useState("");
+
+  useEffect(() => {
+    let path = window.location.pathname;
+    switch (path) {
+      case "/":
+        setCurrent("home");
+        break;
+      case "/users/registration":
+        setCurrent("signup");
+        break;
+      case "/users":
+        setCurrent("users");
+        break;
+      case "/resorts":
+        setCurrent("resorts");
+        break;
+      default:
+        break;
+    }
+  }, []);
+
   return (
     <Router>
       <div>
         <nav className="menu">
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link
+                onClick={() => setCurrent("home")}
+                className={current === "home" ? "current-page" : ""}
+                to="/"
+              >
+                Home
+              </Link>
             </li>
             <li>
-              <Link to="/users/registration">Add User</Link>
+              <Link
+                onClick={() => setCurrent("signup")}
+                className={current === "signup" ? "current-page" : ""}
+                to="/users/registration"
+              >
+                Sign Up
+              </Link>
             </li>
             <li>
-              <Link to="/users">Users</Link>
+              <Link
+                onClick={() => setCurrent("users")}
+                className={current === "users" ? "current-page" : ""}
+                to="/users"
+              >
+                Users
+              </Link>
             </li>
             <li>
-              <Link to="/resorts">Resorts</Link>
+              <Link
+                onClick={() => setCurrent("resorts")}
+                className={current === "resorts" ? "current-page" : ""}
+                to="/resorts"
+              >
+                Resorts
+              </Link>
             </li>
           </ul>
         </nav>
@@ -57,7 +103,7 @@ export default function App() {
 function Home() {
   return (
     <>
-      <div class="home-screen">
+      <div className="home-screen">
         <div>
           <p>Welcome to SkiCom!</p>
           <p>

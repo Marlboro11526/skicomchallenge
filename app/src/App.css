@@ -53,3 +53,8 @@
 .home-screen > div > p:first-child {
   font-weight: bold;
 }
+
+.current-page {
+  text-decoration: underline;
+  font-weight: bold;
+}

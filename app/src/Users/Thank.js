@@ -21,7 +21,7 @@ export default function Thank() {
   }, []);
 
   return (
-    <div class="thank-you-screen">
+    <div className="thank-you-screen">
       <p>
         Thank you, <span>{user}</span>!
       </p>
