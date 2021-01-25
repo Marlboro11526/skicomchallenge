@@ -49,6 +49,12 @@ function Form() {
     <>
       {redirect && <Redirect to={redirect} />}
 
+      <div className="description">
+        <p>
+          I'm trying to learn TailwindCSS, so I used it a little on this page.
+        </p>
+      </div>
+
       <div className="mt-10 sm:mt-0 wrapper">
         <div className="md:grid md:grid-cols-3 md:gap-6 container">
           <div className="md:col-span-1 form-information">

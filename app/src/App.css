@@ -35,13 +35,13 @@
   width: 100%;
 }
 
-.home-screen {
+.flex-wrapper {
   display: flex;
   width: 100vw;
   height: 100vh;
 }
 
-.home-screen > div {
+.flex-wrapper > div {
   margin: auto;
 }
 
@@ -57,4 +57,28 @@
 .current-page {
   text-decoration: underline;
   font-weight: bold;
+}
+
+.description {
+  text-align: center;
+  margin-top: 3em;
+}
+
+.description > p {
+  margin: 0.5em 0;
+}
+
+.description > p:first-child {
+  margin: 1em 0;
+  font-weight: bold;
+}
+
+.table-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 3em;
+}
+
+.table-wrapper > table {
+  margin: auto;
 }

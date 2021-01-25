@@ -103,8 +103,8 @@ export default function App() {
 function Home() {
   return (
     <>
-      <div className="home-screen">
-        <div>
+      <div className="flex-wrapper">
+        <div className="description">
           <p>Welcome to SkiCom!</p>
           <p>
             This application was made with React using create-react-app, as well

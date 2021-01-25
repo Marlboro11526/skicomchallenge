@@ -62,54 +62,68 @@ function Users() {
 
   return (
     <>
-      <table className="table-auto">
-        <thead>
-          <tr>
-            <th onClick={() => sortUsers("first")}>
-              First Name {sortedBy === "first" ? "▼" : ""}
-            </th>
-            <th onClick={() => sortUsers("last")}>
-              Last Name {sortedBy === "last" ? "▼" : ""}
-            </th>
+      <div className="description">
+        <p>
+          Here you can see the currently registered users, as well as resorts
+          grouped by how many times they've been 'favorited'.
+        </p>
+        <p>
+          You can click on the user tables headers to sort by each field type!
+          Not on the frequency table... yet....
+        </p>
+      </div>
+      <div className="table-wrapper">
+        <table className="table-auto">
+          <thead>
+            <tr>
+              <th onClick={() => sortUsers("first")}>
+                First Name {sortedBy === "first" ? "▼" : ""}
+              </th>
+              <th onClick={() => sortUsers("last")}>
+                Last Name {sortedBy === "last" ? "▼" : ""}
+              </th>
 
-            <th onClick={() => sortUsers("email")}>
-              Email Address {sortedBy === "email" ? "▼" : ""}
-            </th>
-            <th onClick={() => sortUsers("resort")}>
-              Favorite Resort {sortedBy === "resort" ? "▼" : ""}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {users &&
-            users.map((item) => (
-              <tr key={item._id.$oid}>
-                <td>{item.first_name}</td>
-                <td>{item.last_name}</td>
-                <td>{item.email}</td>
-                <td>{item.favorite_resort}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+              <th onClick={() => sortUsers("email")}>
+                Email Address {sortedBy === "email" ? "▼" : ""}
+              </th>
+              <th onClick={() => sortUsers("resort")}>
+                Favorite Resort {sortedBy === "resort" ? "▼" : ""}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {users &&
+              users.map((item) => (
+                <tr key={item._id.$oid}>
+                  <td>{item.first_name}</td>
+                  <td>{item.last_name}</td>
+                  <td>{item.email}</td>
+                  <td>{item.favorite_resort}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
 
-      <table className="table-auto">
-        <thead>
-          <tr>
-            <th>Resort</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          {frequencies &&
-            Object.entries(frequencies).map(([key, value]) => (
-              <tr key={key}>
-                <td>{key}</td>
-                <td>{value}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+      <div className="table-wrapper">
+        <table className="table-auto">
+          <thead>
+            <tr>
+              <th>Resort</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {frequencies &&
+              Object.entries(frequencies).map(([key, value]) => (
+                <tr key={key}>
+                  <td>{key}</td>
+                  <td>{value}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }
