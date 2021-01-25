@@ -2,7 +2,7 @@
 
 Full stack challenge with React frontend and Rust backend.
 
-For purposes of the challenge, I'll be leaving `main` branch ontouched from the time of this commit (I lied, I did one more commit for the front-end app), but I'll keep working on other branches for my own learning purposes. :)
+For purposes of the challenge, I'll be leaving `main` branch ontouched from the time of this commit (I lied, I did ~~one more~~ two more commits for the front-end app), but I'll keep working on other branches for my own learning purposes. :)
 
 ## App
 
