@@ -110,6 +110,7 @@ function Users() {
                         title="Click to edit resort"
                         onClick={() => {
                           setEditable(item._id.$oid);
+                          setEditedText("");
                           document.getElementById("new-resort-field").value =
                             "";
                         }}
