@@ -2,6 +2,8 @@
 
 Full stack challenge with React frontend and Rust backend.
 
+For purposes of the challenge, I'll be leaving `main` branch ontouched from the time of this commit, but I'll keep working on other branches for my own learning purposes. :)
+
 ## App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
