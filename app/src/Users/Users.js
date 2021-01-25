@@ -52,6 +52,14 @@ function Users() {
     setUsers(sortedUsers);
   };
 
+  const getResortName = (resortId) => {
+    let resort = resorts.find((r) => r._id.$oid === resortId);
+
+    let resortName = resort ? resort.name : resortId;
+
+    return resortName;
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -77,6 +85,10 @@ function Users() {
         <p>
           You can click on the user tables headers to sort by each field type!
           Not on the frequency table... yet....
+        </p>
+        <p>
+          A user could have a favorite resort that is no longer in the database.
+          In this cases, the resort id is shown instead of the name.
         </p>
       </div>
       <div className="table-wrapper">
@@ -105,11 +117,7 @@ function Users() {
                   <td>{item.first_name}</td>
                   <td>{item.last_name}</td>
                   <td>{item.email}</td>
-                  <td>
-                    {resorts &&
-                      resorts.find((r) => r._id.$oid === item.favorite_resort)
-                        .name}
-                  </td>
+                  <td>{resorts && getResortName(item.favorite_resort)}</td>
                 </tr>
               ))}
           </tbody>
@@ -128,9 +136,7 @@ function Users() {
             {frequencies &&
               Object.entries(frequencies).map(([key, value]) => (
                 <tr key={key}>
-                  <td>
-                    {resorts && resorts.find((r) => r._id.$oid === key).name}
-                  </td>
+                  <td>{resorts && getResortName(key)}</td>
                   <td>{value}</td>
                 </tr>
               ))}

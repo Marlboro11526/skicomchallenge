@@ -82,3 +82,7 @@
 .table-wrapper > table {
   margin: auto;
 }
+
+td {
+  text-align: center;
+}
