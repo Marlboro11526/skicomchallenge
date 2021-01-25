@@ -21,7 +21,7 @@ function Users() {
   };
 
   const addResort = async () => {
-    if (!editedText) {
+    if (!editedText.trim()) {
       setEditable("");
       return;
     }
@@ -40,7 +40,7 @@ function Users() {
   };
 
   const updateResort = async (resortId) => {
-    if (!editedText) {
+    if (!editedText.trim()) {
       setEditable("");
       return;
     }
@@ -81,7 +81,7 @@ function Users() {
       <table className="table-auto">
         <thead>
           <tr>
-            <th>Resort Name</th>
+            <th>Registered Resorts</th>
           </tr>
         </thead>
         <tbody>
@@ -91,15 +91,26 @@ function Users() {
                 {editable !== item._id.$oid ? (
                   <>
                     <td>{item.name}</td>
-                    <td onClick={() => setEditable(item._id.$oid)}>🖉</td>
+                    <td
+                      onClick={() => {
+                        setEditable(item._id.$oid);
+                        document.getElementById("new-resort-field").value = "";
+                      }}
+                    >
+                      🖉
+                    </td>
                   </>
                 ) : (
                   <>
                     <td>
-                      <input onChange={onInputChange} type="text" />
+                      <input
+                        placeholder="New resort name..."
+                        onChange={onInputChange}
+                        type="text"
+                      />
                     </td>
                     <td onClick={() => updateResort(item._id.$oid)}>
-                      {editedText ? "🖫" : "✖"}
+                      {editedText.trim() ? "🖫" : "✖"}
                     </td>
                   </>
                 )}
@@ -109,13 +120,19 @@ function Users() {
           <tr>
             <td>
               <input
+                onClick={() => {
+                  setEditable("");
+                  setEditedText("");
+                }}
                 id="new-resort-field"
                 placeholder="New resort..."
                 onChange={onInputChange}
                 type="text"
               />
             </td>
-            <td onClick={() => addResort()}>{editedText ? "🖫" : ""}</td>
+            <td onClick={() => addResort()}>
+              {editedText.trim() && !editable ? "🖫" : ""}
+            </td>
           </tr>
         </tbody>
       </table>
