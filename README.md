@@ -19,6 +19,8 @@ Simply install dependencies with `npm` or `yarn` then execute the `start` script
 
 ## API
 
+This project is using Rust with Rocket as the web framework, and uses MongoDB for data persistence.
+
 Given my very limited experience with Rust, this part is heavily based off from [this project](https://github.com/louis030195/rustlang-rocket-mongodb), because my priority was getting something working ASAP.
 
 I had a lot of fun working with this part. That's why I also want to completely remake it, mostly because the dependencies here are pretty out of date. I also want to try using `actix-web`, a web framework alternative to `Rocket`.
